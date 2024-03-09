@@ -26,6 +26,9 @@ import { SearchState } from "./Context/SearchContext";
 import ScheduleClass from "./pages/ScheduleClass";
 import StudentScheduledClasses from "./pages/StudentScheduledClasses";
 import StudentNotification from "./pages/StudentNotification";
+import { NotificationState } from "./Context/NotificationContext";
+import TutorNotifications from "./pages/TutorNotifications";
+import TeacherScheduledClasses from "./pages/TeacherScheduledClasses";
 
 function App() {
   return (
@@ -46,35 +49,61 @@ function App() {
         <AuthState>
           <ClassroomState>
             <SearchState>
-          <Router>
-            <Navbar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/about" element={<About />} />
-              {["/tutordashboard", "/tutordashboard/show"].map(
-                (path, index) => (
-                  <Route path={path} element={<TutorDashboard />} key={index} />
-                )
-              )}
+              <NotificationState>
+                <Router>
+                  <Navbar />
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<Signup />} />
+                    <Route path="/about" element={<About />} />
+                    {["/tutordashboard", "/tutordashboard/show"].map(
+                      (path, index) => (
+                        <Route
+                          path={path}
+                          element={<TutorDashboard />}
+                          key={index}
+                        />
+                      )
+                    )}
 
-              <Route path="/tutordashboard/create" element={<TutorCreateDashboard />} />
-              <Route path="/studentdashboard" element={<StudentDashboard />} />
-              <Route path="/studentdashboard/schedule" element={<ScheduleClass />} />
-              <Route path="/studentdashboard/myschedules" element={<StudentScheduledClasses />} />
-              <Route path="/studentdashboard/notifications" element={<StudentNotification />} />
-              
+                    <Route
+                      path="/tutordashboard/create"
+                      element={<TutorCreateDashboard />}
+                    />
+                    <Route
+                      path="/studentdashboard"
+                      element={<StudentDashboard />}
+                    />
+                    <Route
+                      path="/studentdashboard/schedule"
+                      element={<ScheduleClass />}
+                    />
+                    <Route
+                      path="/studentdashboard/myschedules"
+                      element={<StudentScheduledClasses />}
+                    />
+                    <Route
+                      path="/studentdashboard/notifications"
+                      element={<StudentNotification />}
+                    />
 
-              {/* <Route path="/join">
+                    <Route path="/tutordashboard/notifications" element={<TutorNotifications />} />
+                    <Route
+                      path="/tutordashboard/myschedules"
+                      element={<TeacherScheduledClasses />}
+                    />
+
+                    {/* <Route path="/join">
               <Route path="" element={<Join />} />
               <Route path=":id" element={<Join />} />
             </Route> */}
-              <Route path="*" element={<_404 />} />
-            </Routes>
-          </Router>
-          {/* <Sidebar /> */}
-          </SearchState>
+                    <Route path="*" element={<_404 />} />
+                  </Routes>
+                </Router>
+                {/* <Sidebar /> */}
+              </NotificationState>
+            </SearchState>
           </ClassroomState>
         </AuthState>
       </GlobalState>

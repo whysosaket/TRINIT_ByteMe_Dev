@@ -265,6 +265,9 @@ const getNotifications = async (req: CustomRequest, res: Response) => {
       return res.json({ success, error: "No Notifications Found!" });
     }
 
+    // reverse the notifications array to get the latest notifications first
+    notifications = notifications.reverse();
+
     success = true;
     return res.json({ success, notifications });
   } catch (error) {

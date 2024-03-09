@@ -14,8 +14,12 @@ const bottomBarItems = [
     link: "/tutordashboard/create",
   },
   {
-    name: "Show Classes",
-    link: "/tutordashboard/show",
+    name: "My Schedules",
+    link: "/tutordashboard/myschedules",
+  },
+  {
+    name: "Notifications",
+    link: "/tutordashboard/notifications",
   },
 ];
 
