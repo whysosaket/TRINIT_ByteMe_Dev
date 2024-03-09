@@ -58,7 +58,7 @@ const StudentDashboard = () => {
       >
         <h1 className="text-3xl text-end font-bold text-white my-auto">
           <span>
-            <span className="text-teal-300">{"My Scheduled "}</span>
+            <span className="text-teal-300">{"Schedule "}</span>
           </span>
           Classes
         </h1>

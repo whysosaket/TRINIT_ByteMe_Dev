@@ -12,7 +12,7 @@ const getClasses = async (req: CustomRequest, res: Response) => {
     let success = false;
    
     let {search, price, duration} = req.body;
-    console.log(search, price, duration);
+    price = parseInt(price);
     if(!search) {
         search = "";
     }
@@ -52,8 +52,11 @@ const getClasses = async (req: CustomRequest, res: Response) => {
                     v2 = cls.price[1];
                     v3 = cls.price[2];
                 }
+                v1 = parseInt(v1);
+                v2 = parseInt(v2);
+                v3 = parseInt(v3);
 
-                return (v1 <= price || v2 <= price || v3 <= price);
+                return ( v1 <= price || v2 <= price || v3 <= price);
             });
         }
         
