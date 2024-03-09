@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { EvervaultCard, Icon } from "../../ui/evervault-card";
-import React from "react";
+import React, { useState } from "react";
 import { TiTickOutline } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
+import ClassroomContext from "../../Context/ClassroomContext";
+import { useContext } from "react";
 
 interface TutorCardProps {
   index: number;
@@ -13,9 +15,25 @@ const TutorCard: React.FunctionComponent<TutorCardProps> = ({
   index,
   classroom,
 }) => {
+
+  const { respondToSchedule } = useContext(ClassroomContext);
+  const [status, setStatus] = useState(classroom.status);
+
   const getDate = (date: string) => {
     return new Date(date).toDateString();
   };
+
+  const handleApprove = async () => {
+    let res = respondToSchedule(classroom._id, "approved");
+    if(res) setStatus("approved");
+  }
+
+  const handleReject = () => {
+    let res = respondToSchedule(classroom._id, "rejected");
+    if(res) setStatus("rejected");
+  }
+
+
   return (
     <motion.div
       initial={{ y: -100, opacity: 0 }}
@@ -40,15 +58,15 @@ const TutorCard: React.FunctionComponent<TutorCardProps> = ({
           </h2>
         </div>
         <div className="my-auto">
-          <button className="bg-teal-600 text-white px-4 py-1 rounded-lg hover:bg-teal-700">
+         {status === 'approved' && <button className="bg-teal-600 text-white px-4 py-1 rounded-lg hover:bg-teal-700">
             {"Join Now"}
-          </button>
+          </button>}
         </div>
       </div>
 
       <div className="flex w-full justify-between">
         <div className="cursor-pointer text-sm border font-light mt-2 dark:border-white/[0.2] border-black/[0.2] rounded-full text-black dark:text-white px-2 py-0.5">
-          {classroom.status}
+          {status}
         </div>
         <div>
           <p className="cursor-pointer text-sm border font-light mt-2 dark:border-white/[0.2] border-black/[0.2] rounded-full text-black dark:text-white px-2 py-0.5">
@@ -56,12 +74,12 @@ const TutorCard: React.FunctionComponent<TutorCardProps> = ({
           </p>
         </div>
       </div>
-      {classroom.status === "pending" && (
+      {status === "pending" && (
         <div className="w-full flex justify-between mt-4">
-          <button className="bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 cursor-pointer flex align-middle">
+          <button onClick={handleApprove} className="bg-green-600 text-white px-4 py-1 rounded-lg hover:bg-green-700 cursor-pointer flex align-middle">
             Approve <TiTickOutline className="my-auto" />
           </button>
-          <button className="bg-red-600 text-white px-4 py-1 rounded-lg hover:bg-red-700 cursor-pointer flex align-middle">
+          <button onClick={handleReject} className="bg-red-600 text-white px-4 py-1 rounded-lg hover:bg-red-700 cursor-pointer flex align-middle">
             Reject <RxCross2 className="my-auto" />
           </button>
         </div>

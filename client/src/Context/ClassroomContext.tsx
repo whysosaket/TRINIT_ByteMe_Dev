@@ -114,9 +114,35 @@ const ClassroomState = (props: any) => {
         }
     }
 
+    const respondToSchedule = async (scheduleId: string, res: string) => {
+        try{
+            const response = await fetch(`${url}/api/schedule/respondschedule`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem("auth-token") as string
+                },
+                body: JSON.stringify({scheduleId, response: res})
+            });
+
+            const data = await response.json();
+            if(data.success){
+                toastMessage("Response Sent", "success");
+                return true;
+            }else{
+                toastMessage(data.error, "error");
+                return false;
+            }
+        }catch(error){
+            console.log(error);
+            toastMessage("Something went wrong!", "error");
+            return false;
+        }
+    }
+
 
     return (
-        <ClassroomContext.Provider value={{toastMessage, createClassroom, getMyClasses, getStudentSchedule, getTeachersSchedule}}>
+        <ClassroomContext.Provider value={{toastMessage, createClassroom, getMyClasses, getStudentSchedule, getTeachersSchedule, respondToSchedule}}>
         {props.children}
         </ClassroomContext.Provider>
     )

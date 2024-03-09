@@ -8,6 +8,7 @@ import Schedule from "../models/Scheduled";
 import User from "../models/User";
 import Class from "../models/Class";
 import Notification from "../models/Notification";
+import Tutor from "../models/Tutor";
 
 const createSchedule = async (req: CustomRequest, res: Response) => {
   let success = false;
@@ -129,6 +130,9 @@ const getTeacherSchedules = async (req: CustomRequest, res: Response) => {
       return res.json({ success, error: "No Schedules Found!" });
     }
 
+    // reverse the schedules array to get the latest schedules first
+    schedules = schedules.reverse();
+
     success = true;
     return res.json({ success, schedules });
   } catch (error) {
@@ -156,7 +160,7 @@ const respondSchedule = async (req: CustomRequest, res: Response) => {
     }
 
     // Checking if user is a tutor
-    let tutorData = await User.findById(tutor.id);
+    let tutorData = await Tutor.findById(tutor.id);
     if (!tutorData) {
       return res.json({ success, error: "Sorry, Tutor not found!" });
     }
@@ -183,6 +187,7 @@ const respondSchedule = async (req: CustomRequest, res: Response) => {
     let notification = await Notification.create({
       user: scheduleData.user,
       message: `Your schedule request for class ${classData.title} has been ${response}`,
+      date: new Date()
     });
 
     success = true;
