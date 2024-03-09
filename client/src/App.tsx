@@ -24,6 +24,8 @@ import { ClassroomState } from "./Context/ClassroomContext";
 import StudentDashboard from "./pages/StudentDashboard";
 import { SearchState } from "./Context/SearchContext";
 import ScheduleClass from "./pages/ScheduleClass";
+import StudentScheduledClasses from "./pages/StudentScheduledClasses";
+import StudentNotification from "./pages/StudentNotification";
 
 function App() {
   return (
@@ -60,6 +62,8 @@ function App() {
               <Route path="/tutordashboard/create" element={<TutorCreateDashboard />} />
               <Route path="/studentdashboard" element={<StudentDashboard />} />
               <Route path="/studentdashboard/schedule" element={<ScheduleClass />} />
+              <Route path="/studentdashboard/myschedules" element={<StudentScheduledClasses />} />
+              <Route path="/studentdashboard/notifications" element={<StudentNotification />} />
               
 
               {/* <Route path="/join">

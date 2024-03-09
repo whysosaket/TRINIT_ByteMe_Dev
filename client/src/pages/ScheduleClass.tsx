@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import BottomBar from "../components/BottomBar";
-import { useState, useEffect, useContext, useRef } from "react";
 import "../styles/studentDaashboard.css";
 import DatePicker from "../components/studentDashboard/DatePicker";
 import Book from "../components/studentDashboard/Book";
@@ -15,15 +14,16 @@ const bottomBarItems = [
     link: "/studentdashboard/",
   },
   {
-    name: "Show Classes",
-    link: "/tutordashboard/show",
+    name: "My Schedules",
+    link: "/studentdashboard/myschedules",
   },
+  {
+    name: "Notifications",
+    link: "/studentdashboard/notifications",
+  }
 ];
 
 const ScheduleClass = () => {
-
-
-
   return (
     <>
       <motion.div
@@ -37,15 +37,15 @@ const ScheduleClass = () => {
             <span className="text-teal-300">{"Schedule "}</span>
           </span>
           Classes
-        </h1>     
-          <div
-            className={`my-4 h-[33rem] no-scrollbar overflow-y-scroll flex justify-start gap-4`}
-          >
-            <DatePicker />
-            <div className="w-1/2">
-                <Book />
-            </div>
+        </h1>
+        <div
+          className={`my-4 h-[33rem] no-scrollbar overflow-y-scroll flex justify-start gap-4`}
+        >
+          <DatePicker />
+          <div className="w-1/2">
+            <Book />
           </div>
+        </div>
       </motion.div>
       <motion.h1
         initial={{ x: -200, opacity: 0 }}

@@ -20,9 +20,13 @@ const bottomBarItems = [
     link: "/studentdashboard/",
   },
   {
-    name: "Show Classes",
-    link: "/tutordashboard/show",
+    name: "My Schedules",
+    link: "/studentdashboard/myschedules",
   },
+  {
+    name: "Notifications",
+    link: "/studentdashboard/notifications",
+  }
 ];
 
 const StudentDashboard = () => {
