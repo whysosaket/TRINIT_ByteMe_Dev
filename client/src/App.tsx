@@ -27,6 +27,8 @@ import StudentNotification from "./pages/StudentNotification";
 import { NotificationState } from "./Context/NotificationContext";
 import TutorNotifications from "./pages/TutorNotifications";
 import TeacherScheduledClasses from "./pages/TeacherScheduledClasses";
+import StudentVideoStreamShare from "./pages/StudentVideoCall";
+import TutorVideoStreamShare from "./pages/TutorVideoCall";
 
 function App() {
   return (
@@ -91,6 +93,9 @@ function App() {
                       path="/tutordashboard/myschedules"
                       element={<TeacherScheduledClasses />}
                     />
+
+                    <Route path="/studentvideo" element={<StudentVideoStreamShare />} />
+                    <Route path="/tutorvideo" element={<TutorVideoStreamShare />} />
 
                     {/* <Route path="/join">
               <Route path="" element={<Join />} />

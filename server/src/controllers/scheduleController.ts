@@ -274,9 +274,16 @@ const getNotifications = async (req: CustomRequest, res: Response) => {
 
     // reverse the notifications array to get the latest notifications first
     notifications = notifications.reverse();
+    let sendNotif = [];
+    // mark all notifications as read
+    for (let i = 0; i < notifications.length; i++) {
+      sendNotif.push(notifications[i]);
+      notifications[i].seen = true;
+      await notifications[i].save();
+    }
 
     success = true;
-    return res.json({ success, notifications });
+    return res.json({ success, notifications: sendNotif });
   } catch (error) {
     console.log(error);
   }

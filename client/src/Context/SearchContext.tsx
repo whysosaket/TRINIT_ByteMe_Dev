@@ -6,7 +6,7 @@ let url = import.meta.env.VITE_URL;
 const SearchState = (props: any) => {
 
     const [search, setSearch] = useState("");
-    const [price, setPrice] = useState(700);
+    const [price, setPrice] = useState(2500);
     const [duration, setDuration] = useState(0);
     const [classes, setClasses] = useState([] as any);
     const [selectedClass, setSelectedClass] = useState();
