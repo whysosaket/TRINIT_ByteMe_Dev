@@ -19,6 +19,8 @@ import { AuthState } from "./Context/AuthContext";
 import { GlobalState } from "./Context/GlobalContext";
 import About from "./pages/About";
 import { TutorDashboard } from "./pages/TutorDashboard";
+import { TutorCreateDashboard } from "./pages/TutorCreateDashboard";
+import { ClassroomState } from "./Context/ClassroomContext";
 
 function App() {
   return (
@@ -37,6 +39,7 @@ function App() {
       <Background />
       <GlobalState>
         <AuthState>
+          <ClassroomState>
           <Router>
             <Navbar />
             <Routes>
@@ -50,6 +53,8 @@ function App() {
                 )
               )}
 
+              <Route path="/tutordashboard/create" element={<TutorCreateDashboard />} />
+
               
 
               {/* <Route path="/join">
@@ -60,6 +65,7 @@ function App() {
             </Routes>
           </Router>
           {/* <Sidebar /> */}
+          </ClassroomState>
         </AuthState>
       </GlobalState>
     </>

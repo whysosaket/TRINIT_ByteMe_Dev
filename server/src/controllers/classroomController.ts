@@ -21,6 +21,8 @@ const createClass = async (req: CustomRequest, res: Response) => {
       return res.json({ success, error: "Sorry, Tutor not found!" });
     }
 
+    // update tutor price 
+
     // Creating class
     let classData = await Class.create({
       title,

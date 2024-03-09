@@ -1,6 +1,10 @@
 import BottomBar from "../components/BottomBar";
 import { motion } from "framer-motion";
-import { TutorCard } from "../components/TutorDashboard/TutorCard";
+import TutorCard, {
+  TutorCardSkeleton,
+} from "../components/TutorDashboard/TutorCard";
+import { useState, useContext, useEffect } from "react";
+import ClassroomContext from "../Context/ClassroomContext";
 
 const bottomBarItems = [
   {
@@ -17,9 +21,22 @@ const bottomBarItems = [
   },
 ];
 
-const classes = [1,2,3,4]
-
 export const TutorDashboard = () => {
+  const [loading, setLoading] = useState(true);
+  const [classes, setClasses] = useState([]);
+
+  const {getMyClasses} = useContext(ClassroomContext);
+
+  useEffect(() => {
+    const fetchClasses = async () => {
+      const classes = await getMyClasses();
+      setClasses(classes);
+      if(classes.length>0)
+      setLoading(false);
+    }
+    fetchClasses();
+  }, []);
+
   return (
     <>
       <motion.div
@@ -28,26 +45,27 @@ export const TutorDashboard = () => {
         transition={{ duration: 1, delay: 0.2 }}
         className="px-6"
       >
-        <h1
-        className="text-3xl font-bold text-white my-auto text-start"
-        >
-            <span>
-                <span className="text-teal-300">{"My "}</span>
-            </span>
-            Classes
+        <h1 className="text-3xl text-end font-bold text-white my-auto">
+          <span>
+            <span className="text-teal-300">{"My "}</span>
+          </span>
+          Classes
         </h1>
-        <div className="my-4 flex justify-between flex-wrap">
-           {
-                classes.map((_,i) => (
-                     <div className="mx-4" key={i}>
-                        <TutorCard />
-                     </div>
-                ))
-           }
-
-        </div>
-
-
+        {loading ? (
+          <div className="my-4 h-[33rem] no-scrollbar overflow-y-scroll flex justify-between flex-wrap">
+            <TutorCardSkeleton />
+            <TutorCardSkeleton />
+            <TutorCardSkeleton />
+          </div>
+        ) : (
+          <div className={`my-4 h-[33rem] no-scrollbar overflow-y-scroll flex ${classes.length>2?"justify-between":"justify-start"} flex-wrap`}>
+            {classes.map((classroom:any, i) => (
+              <div className="mx-4" key={i}>
+                <TutorCard index={i} classroom={classroom} />
+              </div>
+            ))}
+          </div>
+        )}
       </motion.div>
       <motion.h1
         initial={{ x: -200, opacity: 0 }}
