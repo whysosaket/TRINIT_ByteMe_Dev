@@ -49,7 +49,7 @@ const TutorNotifications = () => {
           <h1 className="text-2xl text-white my-4">No Notifications</h1>
         )}
 
-        <div className={`my-4 h-[33rem] no-scrollbar overflow-y-scroll flex`}>
+        <div className={`my-4 h-[33rem] no-scrollbar overflow-y-scroll flex flex-col`}>
           {notifications.map((notification: any, index: number) => {
             return (
               <div
