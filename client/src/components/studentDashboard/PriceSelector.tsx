@@ -23,7 +23,7 @@ const PriceSelector = ({ }) => {
     type="range"
     defaultValue={1000}
     min={0}
-    max={1500}
+    max={2500}
     value={price}
     onChange={handleChange}
     className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 my-auto"

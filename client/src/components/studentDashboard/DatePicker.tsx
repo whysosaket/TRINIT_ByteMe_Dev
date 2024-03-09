@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import  { useState, useEffect, useRef, useContext } from 'react';
 import SearchContext from '../../Context/SearchContext';
 
 
@@ -9,7 +9,7 @@ function Calendar() {
     const [modalVisible, setModalVisible] = useState(false);
     const calendarRef = useRef(null);
 
-    const {setSelectedDate, selectedDate} = useContext(SearchContext);
+    const {setSelectedDate} = useContext(SearchContext);
 
     useEffect(() => {
         generateCalendar(currentYear, currentMonth);
@@ -111,7 +111,7 @@ function Calendar() {
                 <div className="bg-black/40 shadow-lg rounded-lg overflow-hidden">
                     <div className="flex items-center justify-between px-6 py-3 bg-gray-700">
                         <button onClick={prevMonth} className="text-white">Previous</button>
-                        <h2 className="text-white">{`${currentMonth} ${currentYear}`}</h2>
+                        <h2 className="text-white">{`${currentMonth+1} ${currentYear}`}</h2>
                         <button onClick={nextMonth} className="text-white">Next</button>
                     </div>
                     <div className="grid grid-cols-7 gap-2 p-4" ref={calendarRef} id="calendar">

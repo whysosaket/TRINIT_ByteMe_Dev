@@ -29,15 +29,21 @@ const createSchedule = async (req: CustomRequest, res: Response) => {
       return res.json({ success, error: "Sorry, User not found!" });
     }
 
-    // check if a schedule already exists for this day, for the tutor of this class
+    const startOfDay = new Date(date);
+    startOfDay.setHours(0, 0, 0, 0); // Set time to the start of the day (midnight)
+    const endOfDay = new Date(date);
+    endOfDay.setHours(23, 59, 59, 999); // Set time to the end of the day (just before midnight)
+    
+    // Check if a schedule already exists for this day, for the tutor of this class
     let schedules = await Schedule.find({
       class: classData._id,
-      date: date,
+      date: { $gte: startOfDay, $lt: endOfDay },
     });
+    
     if (schedules.length > 0) {
       return res.json({
-        success,
-        error: "Sorry, A schedule already exists for this day!",
+        success: false,
+        error: "Sorry, a schedule already exists for this day!",
       });
     }
 
@@ -101,6 +107,32 @@ const getMySchedules = async (req: CustomRequest, res: Response) => {
     console.log(error);
   }
 };
+
+const getTeacherSchedules = async (req: CustomRequest, res: Response) => {
+  let success = false;
+  let user = req.user;
+
+  try {
+    let classes = await Class.find({ tutor: user.id });
+    if (!classes) {
+      return res.json({ success, error: "No Classes Found!" });
+    }
+
+    let schedules = await Schedule.find({ class: { $in: classes } }).populate(
+      "user",
+      "name email"
+    );
+
+    if (!schedules) {
+      return res.json({ success, error: "No Schedules Found!" });
+    }
+
+    success = true;
+    return res.json({ success, schedules });
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 const respondSchedule = async (req: CustomRequest, res: Response) => {
   let success = false;
@@ -220,6 +252,26 @@ const sendUserFeedback = async (req: CustomRequest, res: Response) => {
   }
 };
 
+const getNotifications = async (req: CustomRequest, res: Response) => {
+  let success = false;
+  let user = req.user;
+
+  try {
+    let notifications = await Notification.find({ user: user.id });
+    if (!notifications) {
+      notifications = await Notification.find({ tutor: user.id });
+    }
+    if (!notifications) {
+      return res.json({ success, error: "No Notifications Found!" });
+    }
+
+    success = true;
+    return res.json({ success, notifications });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export {
   createSchedule,
   getSchedules,
@@ -227,4 +279,6 @@ export {
   respondSchedule,
   sendTutorFeedback,
   sendUserFeedback,
+  getTeacherSchedules,
+  getNotifications,
 };
