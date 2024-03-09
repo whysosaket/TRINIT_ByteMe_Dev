@@ -182,9 +182,9 @@ const VideoStreamShare = () => {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className='w-[50rem]'>
+            className='w-[35rem]'>
               <h2>You are sharing your screen</h2>
-              <video autoPlay ref={(ref: any) => {if(ref) return ref.srcObject = screenStream}}></video>
+              <video className='my-4 rounded-2xl' autoPlay ref={(ref: any) => {if(ref) return ref.srcObject = screenStream}}></video>
               <button className='bg-teal-500 px-4 py-2 rounded-xl hover:bg-teal-800 mr-4 mt-4' onClick={stopSharingScreen}>Stop Sharing Screen</button>
             </motion.div>
           )}

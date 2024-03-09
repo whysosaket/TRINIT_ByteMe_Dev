@@ -5,7 +5,7 @@ let url = import.meta.env.VITE_URL;
 
 const NotificationState = (props: any) => {
   const [notifications, setNotifications] = useState([] as any);
-
+  const [screenStream, setScreenStream] = useState<MediaStream | null>(null);
   const toastMessage = (message: string, type: string) => {
     if (type === "success") toast.success(message);
     else if (type === "error") toast.error(message);
@@ -35,7 +35,7 @@ const NotificationState = (props: any) => {
 
   return (
     <NotificationContext.Provider
-      value={{ toastMessage, fetchNotifications, notifications }}
+      value={{ toastMessage, fetchNotifications, notifications, screenStream, setScreenStream }}
     >
       {props.children}
     </NotificationContext.Provider>
