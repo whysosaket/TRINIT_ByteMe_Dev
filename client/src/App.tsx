@@ -2,14 +2,12 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useRoutes,
 } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Background from "./components/Background";
 import Navbar from "./components/Navbar";
-import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
 import _404 from "./pages/_404";
 import Login from "./pages/Login";

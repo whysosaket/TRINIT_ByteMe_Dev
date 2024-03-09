@@ -40,7 +40,7 @@ const StudentDashboard = () => {
 
   useEffect(() => {
     const fetchClasses = async () => {
-      const data = await searchClasses("", 0, 0);
+      await searchClasses("", 0, 0);
       setLoading(false);
     };
     fetchClasses();
