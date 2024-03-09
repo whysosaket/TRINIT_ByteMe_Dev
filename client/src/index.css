@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --yinmn-blue: #3A4A77ff;
+  --melon: #F2A598ff;
+  --sky-magenta: #BF7FA7ff;
+  --dark-purple: #292233ff;
+  --ultra-violet: #5A6491ff;
+}
+
+body{
+  background-color: var(--dark-purple);
+  color: white;
+  font-family: "Oxanium", sans-serif;
+  letter-spacing: 2px;
+  /* color: var(--ultra-violet); */
+}
+
+html {
+  scroll-behavior: smooth;
+}
