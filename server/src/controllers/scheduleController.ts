@@ -95,11 +95,13 @@ const getMySchedules = async (req: CustomRequest, res: Response) => {
   try {
     let schedules = await Schedule.find({ user: user.id }).populate(
       "class",
-      "title"
+      "title",
     );
     if (!schedules) {
       return res.json({ success, error: "No Schedules Found!" });
     }
+    // reverse the schedules array to get the latest schedules first
+    schedules = schedules.reverse();
 
     success = true;
     return res.json({ success, schedules });
@@ -119,8 +121,8 @@ const getTeacherSchedules = async (req: CustomRequest, res: Response) => {
     }
 
     let schedules = await Schedule.find({ class: { $in: classes } }).populate(
-      "user",
-      "name email"
+      "class",
+      "title",
     );
 
     if (!schedules) {
@@ -143,7 +145,7 @@ const respondSchedule = async (req: CustomRequest, res: Response) => {
 
   try {
     // chwecking if response is valid
-    if (response != "accepted" && response != "rejected") {
+    if (response != "approved" && response != "rejected") {
       return res.json({ success, error: "Please, enter a valid response" });
     }
 
@@ -184,7 +186,7 @@ const respondSchedule = async (req: CustomRequest, res: Response) => {
     });
 
     success = true;
-    return res.json({ success, info: "Schedule Accepted Successfully!!" });
+    return res.json({ success, info: "Schedule Updated!!" });
   } catch (error) {
     console.log(error);
   }

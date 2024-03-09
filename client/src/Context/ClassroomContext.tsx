@@ -64,9 +64,59 @@ const ClassroomState = (props: any) => {
         }
     }
 
+    const getStudentSchedule = async () => {
+        try{
+            const response = await fetch(`${url}/api/schedule/getstudentschedule`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem("auth-token") as string
+                }
+            });
+
+            const data = await response.json();
+            if(data.success){
+                return data.schedules;
+            }else{
+                toastMessage(data.error, "error");
+                return [];
+            }
+
+        }   catch (error) {
+            console.log(error);
+            toastMessage("Something went wrong!", "error");
+            return [];
+        }
+    }
+
+    const getTeachersSchedule = async () => {
+        try{
+            const response = await fetch(`${url}/api/schedule/getteacherschedules`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem("auth-token") as string
+                }
+            });
+
+            const data = await response.json();
+            if(data.success){
+                return data.schedules;
+            }else{
+                toastMessage(data.error, "error");
+                return [];
+            }
+
+        }   catch (error) {
+            console.log(error);
+            toastMessage("Something went wrong!", "error");
+            return [];
+        }
+    }
+
 
     return (
-        <ClassroomContext.Provider value={{toastMessage, createClassroom, getMyClasses}}>
+        <ClassroomContext.Provider value={{toastMessage, createClassroom, getMyClasses, getStudentSchedule, getTeachersSchedule}}>
         {props.children}
         </ClassroomContext.Provider>
     )
