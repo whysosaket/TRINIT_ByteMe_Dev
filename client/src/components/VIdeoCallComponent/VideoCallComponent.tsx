@@ -155,7 +155,7 @@ const VideoStreamShare = () => {
     <div>
       {!isSharingCamera && !isSharingScreen && (
         <div>
-          <h2>Start sharing</h2>
+          <h2 className='mb-3'>Start sharing</h2>
           <button className='bg-teal-500 px-4 py-2 rounded-xl hover:bg-teal-800 mr-4' onClick={startSharingCamera}>Share Camera</button>
           <button className='bg-teal-500 px-4 py-2 rounded-xl hover:bg-teal-800 mr-4' onClick={startSharingScreen}>Share Screen</button>
           <button className='bg-teal-500 px-4 py-2 rounded-xl hover:bg-teal-800 mr-4' onClick={toggleAudioSharing}>

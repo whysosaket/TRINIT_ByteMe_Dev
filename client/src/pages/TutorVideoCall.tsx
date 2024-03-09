@@ -5,23 +5,23 @@ import VideoStreamShare from "../components/VIdeoCallComponent/VideoCallComponen
 
 
 const bottomBarItems = [
-    {
-      name: "Home",
-      link: "/",
-    },
-    {
-      name: "Search",
-      link: "/studentdashboard/",
-    },
-    {
-      name: "My Schedules",
-      link: "/studentdashboard/myschedules",
-    },
-    {
-      name: "Notifications",
-      link: "/tutordashboard/notifications",
-    }
-  ];
+  {
+    name: "Home",
+    link: "/",
+  },
+  {
+    name: "Create Class",
+    link: "/tutordashboard/create",
+  },
+  {
+    name: "My Schedules",
+    link: "/tutordashboard/myschedules",
+  },
+  {
+    name: "Notifications",
+    link: "/tutordashboard/notifications",
+  },
+];
 
 const StudentNotification = () => {
  
@@ -41,7 +41,7 @@ const StudentNotification = () => {
       </h1>
    
 
-        <div className={`my-4 h-[33rem] no-scrollbar overflow-y-scroll flex flex-col`}>
+        <div className={`my-4 h-[33rem] no-scrollbar overflow-y-scroll flex justify-center scale-110`}>
           <VideoStreamShare />
         </div>
     </motion.div>

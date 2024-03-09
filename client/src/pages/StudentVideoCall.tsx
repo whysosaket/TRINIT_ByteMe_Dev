@@ -45,7 +45,7 @@ const StudentNotification = () => {
    
 
         <div className={`my-4 h-[33rem] no-scrollbar overflow-y-scroll flex`}>
-          <div className="w-1/2">
+          <div className="w-1/2 flex justify-center">
           <VideoStreamShare />
           </div>
           <div className="w-1/2 flex justify-end overflow-y-scroll no-scrollbar max-h-[30rem]">

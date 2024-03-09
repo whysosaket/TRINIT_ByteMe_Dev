@@ -8,24 +8,23 @@ import TutorCard, {
 import { useNavigate } from "react-router-dom";
 
 const bottomBarItems = [
-  {
-    name: "Home",
-    link: "/",
-  },
-  {
-    name: "Search",
-    link: "/studentdashboard/",
-  },
-  {
-    name: "My Schedules",
-    link: "/studentdashboard/myschedules",
-  },
-  {
-    name: "Notifications",
-    link: "/tutordashboard/notifications",
-  },
-];
-
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "Create Class",
+      link: "/tutordashboard/create",
+    },
+    {
+      name: "My Schedules",
+      link: "/tutordashboard/myschedules",
+    },
+    {
+      name: "Notifications",
+      link: "/tutordashboard/notifications",
+    },
+  ];
 const StudentScheduledClasses = () => {
   const { getTeachersSchedule } = useContext(ClassroomContext);
   const [classes, setClasses] = useState([]);
