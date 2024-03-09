@@ -171,7 +171,7 @@ const VideoStreamShare = () => {
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className='w-96'>
+            className='w-[30rem]'>
               <h2>You are sharing your camera</h2>
               {isSharingCamera&&<video className='my-8 rounded-2xl' autoPlay muted ref={(ref: any) => {if(ref) return ref.srcObject = localStream}}></video>}
               <button className='bg-teal-500 px-4 py-2 rounded-xl hover:bg-teal-800 mr-4 mt-4' onClick={stopSharingCamera}>Stop Sharing Camera</button>

@@ -5,6 +5,7 @@ import { TiTickOutline } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import ClassroomContext from "../../Context/ClassroomContext";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 interface TutorCardProps {
   index: number;
@@ -58,9 +59,9 @@ const TutorCard: React.FunctionComponent<TutorCardProps> = ({
           </h2>
         </div>
         <div className="my-auto">
-         {status === 'approved' && <button className="bg-teal-600 text-white px-4 py-1 rounded-lg hover:bg-teal-700">
+         {status === 'approved' && <Link to="/tutorvideo" className="bg-teal-600 text-white px-4 py-1 rounded-lg hover:bg-teal-700">
             {"Join Now"}
-          </button>}
+          </Link>}
         </div>
       </div>
 

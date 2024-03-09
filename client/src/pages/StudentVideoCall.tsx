@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import BottomBar from "../components/BottomBar";
 import { useContext, useEffect } from "react";
 import VideoStreamShare from "../components/VIdeoCallComponent/VideoCallComponent";
+import Flashcard from "../components/studentDashboard/Flashcard";
+import Flashcards from "../components/studentDashboard/Flashcards";
+import AddFlashcard from "../components/studentDashboard/AddFlashcard";
 
 
 const bottomBarItems = [
@@ -41,8 +44,13 @@ const StudentNotification = () => {
       </h1>
    
 
-        <div className={`my-4 h-[33rem] no-scrollbar overflow-y-scroll flex flex-col`}>
+        <div className={`my-4 h-[33rem] no-scrollbar overflow-y-scroll flex`}>
+          <div className="w-1/2">
           <VideoStreamShare />
+          </div>
+          <div className="w-1/2 flex justify-end overflow-y-scroll no-scrollbar max-h-[30rem]">
+            <Flashcards />
+          </div>
         </div>
     </motion.div>
     <motion.h1
@@ -55,6 +63,7 @@ const StudentNotification = () => {
       <span className="text-teal-300">{" Dashboard "}</span>
     </motion.h1>
     <BottomBar items={bottomBarItems} />
+    <AddFlashcard />
   </>
   )
 }

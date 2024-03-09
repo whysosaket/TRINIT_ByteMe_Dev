@@ -22,7 +22,7 @@ const bottomBarItems = [
   },
   {
     name: "Notifications",
-    link: "/studentdashboard/notifications",
+    link: "/tutordashboard/notifications",
   },
 ];
 

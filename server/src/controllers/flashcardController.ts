@@ -13,15 +13,10 @@ const createFlashcard = async (req: CustomRequest, res: Response) => {
   let success = false;
 
   // Saving req data into a variable
-  let { classId, scheduled, content } = req.body;
+  let { classId, scheduled, question, answer } = req.body;
   let user = req.user;
 
   try {
-    // Checking if class exists
-    let classData = await Class.findById(classId);
-    if (!classData) {
-      return res.json({ success, error: "Sorry, Class not found!" });
-    }
 
     // Checking if user exists
     let userData = await User.findById(user.id);
@@ -29,18 +24,11 @@ const createFlashcard = async (req: CustomRequest, res: Response) => {
       return res.json({ success, error: "Sorry, User not found!" });
     }
 
-    // Checking if scheduled exists
-    let scheduledData = await Scheduled.findById(scheduled);
-    if (!scheduledData) {
-      return res.json({ success, error: "Sorry, Scheduled not found!" });
-    }
-
     // Creating flashcard
     let flashcard = await Flashcard.create({
-      class: classData._id,
       user: userData._id,
-      scheduled: scheduled,
-      content: content,
+      question,
+      answer,
     });
 
     success = true;

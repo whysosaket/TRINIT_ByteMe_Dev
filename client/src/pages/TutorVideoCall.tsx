@@ -19,7 +19,7 @@ const bottomBarItems = [
     },
     {
       name: "Notifications",
-      link: "/studentdashboard/notifications",
+      link: "/tutordashboard/notifications",
     }
   ];
 
@@ -35,8 +35,9 @@ const StudentNotification = () => {
     >
       <h1 className="text-3xl text-end font-bold text-white my-auto">
         <span>
-          <span className="text-teal-300">{"Notifications "}</span>
+          <span className="text-teal-300">{"Video "}</span>
         </span>
+        Conference
       </h1>
    
 

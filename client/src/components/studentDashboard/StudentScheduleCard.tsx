@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { EvervaultCard, Icon } from "../../ui/evervault-card";
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface TutorCardProps {
   index: number;
@@ -38,9 +39,11 @@ const TutorCard: React.FunctionComponent<TutorCardProps> = ({
           </h2>
         </div>
         <div className="my-auto">
-          {classroom.status === 'approved' &&<button className="bg-teal-600 text-white px-4 py-1 rounded-lg hover:bg-teal-700">
-            {"Join Now"}
-          </button>}
+          {classroom.status === "approved" && (
+            <Link to="/studentvideo" className="bg-teal-600 text-white px-4 py-1 rounded-lg hover:bg-teal-700">
+              {"Join Now"}
+            </Link>
+          )}
         </div>
       </div>
 
