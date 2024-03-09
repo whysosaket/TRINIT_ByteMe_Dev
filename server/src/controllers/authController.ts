@@ -102,7 +102,6 @@ const loginUser = async (req: Request, res: Response) => {
 };
 
 const getUserInfo = async (req: CustomRequest, res: Response) => {
-  console.log(req.user);
   try {
     const user = await User.findById(req.user.id).select("-password");
     if (!user) {
@@ -143,6 +142,13 @@ const createTutor = async (req: Request, res: Response) => {
     // Converting the name to title case
     data.name = toTitleCase(data.name);
 
+    // convert every language to title case
+    const len = data.languages.length;
+    let languages = [];
+    for (let i = 0; i < len; i++) {
+      languages.push(toTitleCase(data.languages[i]));
+    }
+
     // Creating the user
     tutor = await Tutor.create({
       name: data.name,
@@ -150,6 +156,7 @@ const createTutor = async (req: Request, res: Response) => {
       email: data.email,
       languages: data.languages,
       description: data.description,
+      eoe: data.eoe,
     });
 
     success = true;
@@ -202,4 +209,17 @@ const loginTutor = async (req: Request, res: Response) => {
   }
 };
 
-export { createUser, loginUser, getUserInfo, createTutor, loginTutor};
+const getTutorInfo = async (req: CustomRequest, res: Response) => {
+  try {
+    const tutor = await Tutor.findById(req.user.id).select("-password");
+    if (!tutor) {
+      return res.json({ error: "No Tutor Found!" });
+    }
+    return res.json({ success: true, tutor });
+  } catch (error) {
+    console.log(error);
+    return res.json({ error: "Something Went Wrong!" });
+  }
+}
+
+export { createUser, loginUser, getUserInfo, createTutor, loginTutor, getTutorInfo};
