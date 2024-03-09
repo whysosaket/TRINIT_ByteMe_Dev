@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const scheduledSchema = new mongoose.Schema({
+const notificationSchema = new mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'user', required: false},
     tutor: {type: mongoose.Schema.Types.ObjectId, ref: 'tutor', required: false},
     date: {type: Date, required: true},
@@ -8,4 +8,4 @@ const scheduledSchema = new mongoose.Schema({
     seen: {type: Boolean, default: false},
 });
 
-export default mongoose.model('scheduled', scheduledSchema);
+export default mongoose.model('notification', notificationSchema);

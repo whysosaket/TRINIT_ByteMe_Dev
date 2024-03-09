@@ -29,6 +29,18 @@ const createSchedule = async (req: CustomRequest, res: Response) => {
       return res.json({ success, error: "Sorry, User not found!" });
     }
 
+    // check if a schedule already exists for this day, for the tutor of this class
+    let schedules = await Schedule.find({
+      class: classData._id,
+      date: date,
+    });
+    if (schedules.length > 0) {
+      return res.json({
+        success,
+        error: "Sorry, A schedule already exists for this day!",
+      });
+    }
+
     // Creating schedule
     let schedule = await Schedule.create({
       class: classData._id,
@@ -42,6 +54,7 @@ const createSchedule = async (req: CustomRequest, res: Response) => {
     let notification = await Notification.create({
       user: classData.tutor,
       message: `You have a new schedule request for your class ${classData.title}`,
+      date: new Date(),
     });
 
     success = true;

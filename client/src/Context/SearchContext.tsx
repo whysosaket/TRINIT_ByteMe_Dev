@@ -9,10 +9,12 @@ const SearchState = (props: any) => {
     const [price, setPrice] = useState(700);
     const [duration, setDuration] = useState(0);
     const [classes, setClasses] = useState([] as any);
+    const [selectedClass, setSelectedClass] = useState();
+    const [selectedDate, setSelectedDate] = useState();
 
     useEffect(() => {
         const fetchClasses = async () => {
-            const data = await searchClasses();
+            await searchClasses();
         };
         fetchClasses();
     }, [search, price, duration]);
@@ -47,8 +49,35 @@ const SearchState = (props: any) => {
         }
     }
 
+    const createSchedule = async (classId: string, date: Date, duration: number, price: number
+        
+        ) => {
+        try{
+            const res = await fetch(`${url}/api/schedule/createschedule`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": localStorage.getItem("auth-token") as string,
+                },
+                body: JSON.stringify({classId, date, duration, price}),
+            });
+            const data = await res.json();
+            if(data.success){
+                toastMessage("Schedule Requested", "success");
+                return true;
+            }
+            else{
+                toastMessage(data.error, "error");
+            }
+        }catch(err){
+            console.log(err);
+            toastMessage("Server Error", "error");
+        }
+    }
+
     return (
-        <SearchContext.Provider value={{toastMessage, searchClasses, setSearch, setDuration, setPrice, price, classes}}>
+        <SearchContext.Provider value={{toastMessage, searchClasses, setSearch, setDuration, setPrice, price, classes, 
+        setSelectedClass, selectedClass, selectedDate, setSelectedDate, search, createSchedule}}>
         {props.children}
         </SearchContext.Provider>
     )

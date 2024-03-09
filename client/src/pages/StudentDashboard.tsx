@@ -7,7 +7,8 @@ import { useState, useEffect, useContext, useRef } from "react";
 import "../styles/studentDaashboard.css";
 import { FaSearch } from "react-icons/fa";
 import StudentTopBar from "../components/studentDashboard/StudentTopBar";
-import SearchContext  from "../Context/SearchContext";
+import SearchContext from "../Context/SearchContext";
+import { useNavigate } from "react-router-dom";
 
 const bottomBarItems = [
   {
@@ -27,9 +28,11 @@ const bottomBarItems = [
 const StudentDashboard = () => {
   const [loading, setLoading] = useState(true);
 
-  const { searchClasses, setSearch, classes } = useContext(SearchContext);
+  const { searchClasses, setSearch, classes, setSelectedClass } =
+    useContext(SearchContext);
 
   const searchRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchClasses = async () => {
@@ -44,9 +47,7 @@ const StudentDashboard = () => {
     setLoading(true);
     await searchClasses(searchRef.current?.value, 0, 0);
     setLoading(false);
-  }
-
-
+  };
 
   return (
     <>
@@ -94,7 +95,16 @@ const StudentDashboard = () => {
             } flex-wrap`}
           >
             {classes.map((classroom: any, i: number) => (
-              <div className="mx-4" key={i}>
+              <div
+                onClick={() =>
+                  navigate(
+                    "/studentdashboard/schedule",
+                    setSelectedClass(classroom)
+                  )
+                }
+                className="mx-4"
+                key={i}
+              >
                 <TutorCard index={i} classroom={classroom} />
               </div>
             ))}
