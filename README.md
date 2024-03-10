@@ -2,7 +2,7 @@
 
 Welcome to Lingua Connect, the language learning platform that connects learners with experienced teachers. This repository contains the source code and documentation for the Lingua Connect application.
 
-#### VIDEO DEMO LINK -> 
+#### VIDEO DEMO LINK ->  https://drive.google.com/file/d/16lHnX0Urptk142Z-7CAaxHzF6Rd-isPF/view?usp=sharing
 
 ## Overview
 
